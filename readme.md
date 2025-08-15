@@ -60,3 +60,56 @@ const version = b.option(
 ```bash
 zig build -Dversion=1.2.3
 ```
+
+## Linking libraries
+
+Linking is majorly done throug the zig build system in ways analogous to CMake in C(++)
+
+### System libraries:
+
+```zig
+// In build.zig
+const exe = b.addExecutable(.{
+    .name = "my-app",
+    .root_source_file = .{ .path = "src/main.zig" },
+    .target = target,
+    .optimize = optimize,
+});
+
+// 👇 Link system libraries here
+exe.linkSystemLibrary("c");
+exe.linkSystemLibrary("raylib");
+
+b.installArtifact(exe);
+```
+
+### Dependencies
+
+Point to the library source code location:
+
+```zig
+// In build.zig
+const my_math_lib = b.addStaticLibrary(.{
+    .name = "my_math",
+    .root_source_file = .{ .path = "libs/my_math/src/root.zig" }, // Path to the library's source
+    .target = target,
+    .optimize = optimize,
+});
+```
+
+link it:
+
+```zig
+// In build.zig, after defining the library
+const exe = b.addExecutable(.{
+    .name = "my-app",
+    .root_source_file = .{ .path = "src/main.zig" },
+    .target = target,
+    .optimize = optimize,
+});
+
+// 👇 Link the library from source
+exe.linkLibrary(my_math_lib);
+
+b.installArtifact(exe);
+```
