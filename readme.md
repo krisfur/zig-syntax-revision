@@ -100,7 +100,7 @@ and to also run tests:
 zig build test
 ```
 
-> ⚠️ This is using debug realease mode, which is insanely slow, if you want to build lightning fast giving up all checks use --release=fast
+> ⚠️ This is using debug realease mode, which is a bit slow, if you want to build lightning fast giving up all checks use --release=fast; first compilation will be slow regardless due to lack of .zig-cache
 
 ## Build flags
 
