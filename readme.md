@@ -2,7 +2,7 @@
 
 Basic notes on Zig syntax and setting up a project.
 
-> On Windows you need to add the location of your zig.exe to exclusions in Microsoft Defender to not experience horrible pauses when compiling. Even if you install with `winget`! To find your install location run `zig env`.
+> ⚠️ On Windows you need to add the location of your zig.exe to exclusions in Microsoft Defender to not experience horrible pauses when compiling. Even if you install with `winget`! To find your install location run `zig env`.
 
 ## Project setup
 
@@ -100,15 +100,17 @@ and to also run tests:
 zig build test
 ```
 
+> ⚠️ This is using debug realease mode, which is insanely slow, if you want to build lightning fast giving up all checks use --release=fast
+
 ## Build flags
 
 Default build is the debug mode
 
 ### Release builds
 
-- `--release-safe` -> heavy optimisation and all safety checks
-- `--release-fast` -> best optimisation with no safety checks
-- `--release-small` -> optimises for smallest binary size
+- `--release=safe` -> heavy optimisation and all safety checks
+- `--release=fast` -> best optimisation with no safety checks
+- `--release=small` -> optimises for smallest binary size
 
 ### Cross-platform compilation
 
