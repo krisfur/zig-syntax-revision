@@ -7,9 +7,9 @@ pub fn main() !void {
 
 test "simple test" {
     const gpa = std.testing.allocator;
-    var list: std.ArrayList(i32) = .empty;
-    defer list.deinit(gpa); // Try commenting this out and see if zig detects the memory leak!
-    try list.append(gpa, 42);
+    var list = std.ArrayList(i32).init(gpa); // Initialize with the allocator
+    defer list.deinit(); // deinit no longer takes an allocator argument
+    try list.append(42); // append no longer takes an allocator argument
     try std.testing.expectEqual(@as(i32, 42), list.pop());
 }
 
