@@ -13,7 +13,7 @@ pub fn main() !void {
     // VALUES
 
     const integer: i32 = 1 + 3; //const cannot be changed
-    var floaty: f64 = 32.0; //var can be changed
+    var floaty: f64 = 32.0; //var can be changed, and MUST be initialised to a value or undefined
     floaty += 37.0;
     print("We have {} of type {} and {} of type {}.", .{ integer, @TypeOf(integer), floaty, @TypeOf(floaty) });
     //print(integer + floaty); would fail
@@ -43,6 +43,30 @@ pub fn main() !void {
     print("bytes value: {s}\ntype of bytes: {}\n", .{ bytes, @TypeOf(bytes) }); //inferred a null terminated string literal: *const [5:0]u8
     // if you use {s} you get the string interpretation of the string array, if you use any you get the specific values for each letter:
     // hello vs { 104, 101, 108, 108, 111 }
+
+    // multiline string literals
+    const SQL: []const u8 =
+        \\SELECT * FROM table
+        \\where project = 'hey'
+    ;
+    print("\n{s}\n", .{SQL});
+
+    // TUPLES, ARRAYS, VECTORS, DESTRUCTURING
+    var x: u32 = undefined;
+    var y: u32 = undefined;
+    var z: u32 = undefined;
+
+    const myTuple = .{ 2, 3 };
+    x, y = myTuple; //we destruct the tuple and grab the values
+
+    const myArray = [_]u32{ 3, 4, 5 }; //arrays need a defined type
+    x, y, z = myArray; //same thing
+
+    const myVector: @Vector(3, u32) = .{ 6, 7, 8 }; //vectors need a defined length using a comptime int, and defined type
+    x, y, z = myVector; //same thing
+    print("\nx:{},y:{},z:{}\n", .{ x, y, z }); //what we've been using for this have just been tuples!
+    print("x:{},y:{}\n", myTuple); //same thing!
+
 }
 
 test "simple test" { //tests run with "zig test ./src/main.zig"
