@@ -20,6 +20,29 @@ pub fn main() !void {
     print("\n{}+{}={}\n", .{ integer, floaty, integer + floaty }); //adding int and float gives float, no type error
     const myString: []const u8 = "hewwo"; //strings are arrays of u8, so UTF-8 supported
     print("{s}\n", .{myString}); //fmt needs to know that this is meant as a string literal
+
+    // optional values also exist
+    var optional_thing: ?[]const u8 = null; //we can have a nullable thing! this will be string or null
+    print("optional_thing; type: {} value: {?s}\n", .{
+        @TypeOf(optional_thing), optional_thing,
+    });
+    optional_thing = "I'm a real string now!";
+    print("optional_thing; type: {} value: {?s}\n", .{
+        @TypeOf(optional_thing), optional_thing,
+    }); //the type retains the "?" - it can turn null again if needed
+
+    const myBool: bool = true; //bools behave as expected, lowercase true/false
+    print("This is true: {}\n", .{myBool});
+
+    // the language has built in asserts as well std.debug.assert(bool)
+    std.debug.assert(myBool == true);
+    //std.debug.assert(myBool == false); //this will panic to hell
+
+    // you can also infer types for obvious things
+    const bytes = "hello";
+    print("bytes value: {s}\ntype of bytes: {}\n", .{ bytes, @TypeOf(bytes) }); //inferred a null terminated string literal: *const [5:0]u8
+    // if you use {s} you get the string interpretation of the string array, if you use any you get the specific values for each letter:
+    // hello vs { 104, 101, 108, 108, 111 }
 }
 
 test "simple test" { //tests run with "zig test ./src/main.zig"
