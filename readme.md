@@ -166,28 +166,23 @@ b.installArtifact(exe);
 Point to the library source code location:
 
 ```zig
-// In build.zig
-const my_math_lib = b.addStaticLibrary(.{
-    .name = "my_math",
-    .root_source_file = .{ .path = "libs/my_math/src/root.zig" }, // Path to the library's source
-    .target = target,
-    .optimize = optimize,
+//in build.zig
+const myLibrary = b.addLibrary(.{
+    .name = "myLibrary",
+    .linkage = .static, //can do dynamic as well
+    .root_module = b.createModule(.{
+        .root_source_file = b.path("src/myLibrary.zig"),
+        .target = target,
+        .optimize = optimize,
+    }),
 });
 ```
 
 link it:
 
 ```zig
-// In build.zig, after defining the library
-const exe = b.addExecutable(.{
-    .name = "my-app",
-    .root_source_file = .{ .path = "src/main.zig" },
-    .target = target,
-    .optimize = optimize,
-});
-
-// 👇 Link the library from source
-exe.linkLibrary(my_math_lib);
+// In build.zig, after defining the executable
+exe.linkLibrary(myLibrary);
 
 b.installArtifact(exe);
 ```
