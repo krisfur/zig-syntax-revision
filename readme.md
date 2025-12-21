@@ -163,7 +163,7 @@ b.installArtifact(exe);
 
 ### Dependencies
 
-Point to the library source code location:
+- For C-style libraries:
 
 ```zig
 //in build.zig
@@ -178,11 +178,28 @@ const myLibrary = b.addLibrary(.{
 });
 ```
 
-link it:
+and link it:
 
 ```zig
 // In build.zig, after defining the executable
 exe.linkLibrary(myLibrary);
+
+b.installArtifact(exe);
+```
+
+- For zig-style modules:
+
+```zig
+const myModule = b.addModule("myModule", .{
+    .root_source_file = b.path("src/myModule.zig"),
+});
+```
+
+and link it:
+
+```zig
+// In build.zig, after defining the executable
+exe.root_module.addImport("myModule", myModule);
 
 b.installArtifact(exe);
 ```

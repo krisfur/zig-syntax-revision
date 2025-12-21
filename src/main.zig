@@ -1,8 +1,11 @@
 const std = @import("std"); // import as expected
 const print = std.debug.print; // you can also do aliasing here, a bit pythonic
 
-//import external functions from a library
+//import external functions from a library - C style
 extern fn importedAddInt(a: i128, b: i128) i128; // very C/C++ like, basically a header to the function we import
+
+//import external modules - zig style
+const myModule = @import("myModule");
 
 pub fn main() !void {
     // There are no multiline comments in zig, git gud or use your IDEs ctrl+/
@@ -23,8 +26,14 @@ pub fn main() !void {
     print("\n{}+{}={}\n", .{ integer, floaty, integer + floaty }); //adding int and float gives float, no type error
     const myString: []const u8 = "hewwo"; //strings are arrays of u8, so UTF-8 supported
     print("{s}\n", .{myString}); //fmt needs to know that this is meant as a string literal
+
+    // using an impotred function from a C style library
     const externallyAdded = importedAddInt(6, 7);
     print("{}\n", .{externallyAdded});
+
+    // or with a full module
+    const externallyAdded2 = myModule.importedAddInt(6, 7);
+    print("{}\n", .{externallyAdded2});
 
     // optional values also exist
     var optional_thing: ?[]const u8 = null; //we can have a nullable thing! this will be string or null

@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    // We import libraries
+    // We import libraries - C style!
     const myLibrary = b.addLibrary(.{
         .name = "myLibrary",
         .linkage = .static, //can do dynamic as well
@@ -22,14 +22,20 @@ pub fn build(b: *std.Build) void {
         }),
     });
 
+    // We import modules - zig style!
+    const myModule = b.addModule("myModule", .{
+        .root_source_file = b.path("src/myModule.zig"),
+    });
+
     // This creates an executable artifact that will be built from the module.
     const exe = b.addExecutable(.{
         .name = "zig_syntax_revision",
         .root_module = exe_mod,
     });
 
-    // Link the library once the executable is defined
+    // Link the library/module once the executable is defined
     exe.linkLibrary(myLibrary);
+    exe.root_module.addImport("myModule", myModule);
 
     // This declares intent for the executable to be installed into the standard location when the user invokes the "install" step
     b.installArtifact(exe);
