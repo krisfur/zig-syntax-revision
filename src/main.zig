@@ -188,7 +188,7 @@ pub fn main() !void {
     // you can use pointers at comptime as well, zig is zig, just can't preserve memory addresses if you dereference pointers
 
     // slices - pointer and a length
-    // slice length is unknown at runtime, unlike arrays
+    // slice length is known only at runtime, unlike arrays which are known at compile time
 
 }
 
