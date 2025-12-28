@@ -27,6 +27,20 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/myModule.zig"),
     });
 
+    // different chapters
+    const valuesModule = b.addModule("valuesModule", .{
+        .root_source_file = b.path("src/01values.zig"),
+    });
+    const listsModule = b.addModule("listsModule", .{
+        .root_source_file = b.path("src/02lists.zig"),
+    });
+    const branchesAndLoopsModule = b.addModule("branchesAndLoopsModule", .{
+        .root_source_file = b.path("src/03branchesAndLoops.zig"),
+    });
+    const pointersModule = b.addModule("pointersModule", .{
+        .root_source_file = b.path("src/04pointers.zig"),
+    });
+
     // This creates an executable artifact that will be built from the module.
     const exe = b.addExecutable(.{
         .name = "zig_syntax_revision",
@@ -36,6 +50,10 @@ pub fn build(b: *std.Build) void {
     // Link the library/module once the executable is defined
     exe.linkLibrary(myLibrary);
     exe.root_module.addImport("myModule", myModule);
+    exe.root_module.addImport("valuesModule", valuesModule);
+    exe.root_module.addImport("listsModule", listsModule);
+    exe.root_module.addImport("branchesAndLoopsModule", branchesAndLoopsModule);
+    exe.root_module.addImport("pointersModule", pointersModule);
 
     // This declares intent for the executable to be installed into the standard location when the user invokes the "install" step
     b.installArtifact(exe);
