@@ -58,6 +58,11 @@ pub fn executeBranchesAndLoops() !void { // !void returns void or error
     }
     print("{}\n", .{sum2}); //0+1+2+3+4+5=15
 
+    //C-style loop equivalent using ranges
+    for (0..10) |index| {
+        print("Index is: {d}\n", .{index});
+    }
+
     // multi-object for (zip)
     const items2 = [_]i32{ 6, 5, 4, 0, 2, 6 };
     for (items, items2) |value1, value2| { //need to be same length
