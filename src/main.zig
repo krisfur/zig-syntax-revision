@@ -19,9 +19,6 @@ pub fn main() !void { // !void returns void or error
 
     // Print to stderr:
     std.debug.print("All your {s} are belong to us.\n", .{"codebase"});
-    // without macros to print to stdout or stderr:
-    try std.io.getStdOut().writer().writeAll("Hello, World!\n"); //note that the official docs for 0.15.2 are wrong on this
-    // try keyword is needed for functions that can panic/return error
 
     // using an imported function from a C style library
     const externallyAdded = importedAddInt(6, 7);
@@ -32,6 +29,7 @@ pub fn main() !void { // !void returns void or error
     print("{}\n", .{externallyAdded2});
 
     // See other files for different topics
+    // try keyword is needed for functions that can panic/return error
     try valuesModule.executeValues(); // VALUES
     try listsModule.executeLists(); // TUPLES, ARRAYS, SLICES, VECTORS, DESTRUCTURING
     try branchesAndLoopsModule.executeBranchesAndLoops(); // BRANCHES, LOOPS
