@@ -2,6 +2,16 @@
 
 Basic notes on Zig syntax and setting up a project.
 
+## Chapters
+
+0. [Main function and importing](./src/main.zig)
+1. [Values](./src/01values.zig)
+2. [Lists](./src/02lists.zig)
+3. [Branches and Loops](./src/03branchesAndLoops.zig)
+4. [Pointers](./src/04pointers.zig)
+
+...to be continued
+
 > ⚠️ On Windows you need to add the location of your zig.exe to exclusions in Microsoft Defender to not experience horrible pauses when compiling. Even if you install with `winget`! To find your install location run `zig env`.
 
 ## Project setup
