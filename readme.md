@@ -12,9 +12,9 @@ Basic notes on Zig syntax and setting up a project.
 
 ...to be continued
 
-> ⚠️ On Windows you need to add the location of your zig.exe to exclusions in Microsoft Defender to not experience horrible pauses when compiling. Even if you install with `winget`! To find your install location run `zig env`.
-
 ## Project setup
+
+> ⚠️ On Windows you need to add the location of your zig.exe to exclusions in Microsoft Defender to not experience horrible pauses when compiling. Even if you install with `winget`! To find your install location run `zig env`.
 
 1. Create a directory and navigate to it
 2. Initialise with
