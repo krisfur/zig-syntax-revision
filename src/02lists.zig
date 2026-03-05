@@ -14,7 +14,7 @@ pub fn executeLists() !void { // !void returns void or error
     x, y, z = myArray; //same thing
 
     // [TO DO]
-    // slices - pointer and a length
+    // slices - pointer and a length, bound checking
     // slice length is known only at runtime, unlike arrays which are known at compile time
 
     const myVector: @Vector(3, u32) = .{ 6, 7, 8 }; //vectors need a defined length using a comptime int, and defined type
