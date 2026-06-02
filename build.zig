@@ -48,7 +48,7 @@ pub fn build(b: *std.Build) void {
     });
 
     // Link the library/module once the executable is defined
-    exe.linkLibrary(myLibrary);
+    exe.root_module.linkLibrary(myLibrary);
     exe.root_module.addImport("myModule", myModule);
     exe.root_module.addImport("valuesModule", valuesModule);
     exe.root_module.addImport("listsModule", listsModule);
