@@ -58,4 +58,12 @@ pub fn executeValues() !void { // !void returns void or error
 
     // peer type resolution happens automagically with switch, if, while, for, and some binary ops: it chooses a type all peers can coerce into
     // think of adding an i8 and i16 -> result will be i16
+
+    // for mathematical extremities use std.math
+    const inf = std.math.inf(f32);
+    const negative_inf = -std.math.inf(f64);
+    const nan = std.math.nan(f128);
+    _ = inf;
+    _ = negative_inf;
+    _ = nan;
 }
