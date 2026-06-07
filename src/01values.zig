@@ -42,4 +42,20 @@ pub fn executeValues() !void { // !void returns void or error
         \\where project = 'hey'
     ;
     print("\n{s}\n", .{SQL});
+
+    // casting is possible via coercion (known safe), exlicit casts, and peer type resolution
+    // for coercion use @as()
+    const a: i32 = 2;
+    const b = @as(u16, a);
+    print("\n{}\n", .{b});
+
+    // for explicit casts use specific builtins like @errorCast, @intCast, or @truncate -> some can be memory unsafe if used incorrectly
+    const c: u16 = 0xabcd;
+    const d: u8 = @truncate(c);
+    const expected: u8 = 0xcd;
+    print("{} != {}\n", .{ c, d });
+    print("{} == {}", .{ d, expected });
+
+    // peer type resolution happens automagically with switch, if, while, for, and some binary ops: it chooses a type all peers can coerce into
+    // think of adding an i8 and i16 -> result will be i16
 }
