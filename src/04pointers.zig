@@ -16,11 +16,13 @@ pub fn executePointers() !void {
     const ptr = &array[2]; //get a pointer to 3rd item in the array
     print("{}\n", .{ptr.*}); //dereference to get the value
     try expect(@TypeOf(ptr) == *i32); //the type of a pointer is *type
+
     // pointer arithmetic is supported
     var ptrArray: [*]const i32 = &array; //the pointer will now be var to be mutable, the type is hard to infer so be explicit
     try expect(ptrArray[0] == 1);
     ptrArray += 1;
     try expect(ptrArray[0] == 2);
+
     // this is a bit unsafe, better to use slices which are bound checking
     var array2 = [_]u8{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     var start: usize = 2; // var to make it runtime-known

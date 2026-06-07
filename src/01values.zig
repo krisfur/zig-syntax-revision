@@ -8,6 +8,7 @@ pub fn executeValues() !void { // !void returns void or error
     floaty += 37.0;
     print("We have {} of type {} and {} of type {}.", .{ integer, @TypeOf(integer), floaty, @TypeOf(floaty) });
     //print(integer + floaty); would fail
+
     print("\n{}+{}={}\n", .{ integer, floaty, integer + floaty }); //adding int and float gives float, no type error
     const myString: []const u8 = "hewwo"; //strings are arrays of u8, so UTF-8 supported
     print("{s}\n", .{myString}); //fmt needs to know that this is meant as a string literal
