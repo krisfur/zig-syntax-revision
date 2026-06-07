@@ -54,7 +54,7 @@ pub fn executeValues() !void { // !void returns void or error
     const d: u8 = @truncate(c);
     const expected: u8 = 0xcd;
     print("{} != {}\n", .{ c, d });
-    print("{} == {}", .{ d, expected });
+    print("{} == {}\n", .{ d, expected });
 
     // peer type resolution happens automagically with switch, if, while, for, and some binary ops: it chooses a type all peers can coerce into
     // think of adding an i8 and i16 -> result will be i16
